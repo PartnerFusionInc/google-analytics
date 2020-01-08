@@ -237,7 +237,7 @@ func (api *API) ParseQuery(str string) string {
 }
 
 // Send client data to GA
-func (api *API) Send(client *Client) string {
+func (api *API) Send(client *Client) (string, error) {
 	var apidata []string
 	var iface map[string]interface{}
 	data := new(bytes.Buffer)
@@ -251,13 +251,13 @@ func (api *API) Send(client *Client) string {
 	cli := new(http.Client)
 	req, err := http.NewRequest("POST", config.ApiUrl, strings.NewReader(postdata))
 	if err != nil {
-		return err.Error()
+		return "", err
 	}
 	req.Header.Set("User-Agent", api.UserAgent)
 	req.Header.Set("Content-Type", api.ContentType)
 	res, err := cli.Do(req)
 	if err != nil {
-		return err.Error()
+		return "", err
 	} else {
 		//fmt.Println(config.ApiUrl)
 		//fmt.Println(postdata)
@@ -266,7 +266,7 @@ func (api *API) Send(client *Client) string {
 	defer res.Body.Close()
 	read, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return err.Error()
+		return "", err
 	}
-	return string(read)
+	return string(read), nil
 }
