@@ -5,7 +5,7 @@ An easy-to-use Google Analytics API (v1) via Measurement Protocol with golang
 
 # Installation
 ```bash
-go get github.com/OzqurYalcin/google-analytics
+go get github.com/PartnerFusionInc/google-analytics
 ```
 
 # Measuring Purchases Example
