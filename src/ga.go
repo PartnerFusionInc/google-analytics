@@ -3,6 +3,7 @@ package ga
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -258,15 +259,17 @@ func (api *API) Send(client *Client) (string, error) {
 	res, err := cli.Do(req)
 	if err != nil {
 		return "", err
-	} else {
-		//fmt.Println(config.ApiUrl)
-		//fmt.Println(postdata)
-		//fmt.Println(res.Status)
 	}
+
 	defer res.Body.Close()
 	read, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return "", err
 	}
+
+	if res.StatusCode >= 400 {
+		return "", errors.New(string(read))
+	}
+
 	return string(read), nil
 }
