@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/OzqurYalcin/google-analytics/src"
+	ga "github.com/PartnerFusionInc/google-analytics/src"
 	"github.com/google/uuid"
 )
 

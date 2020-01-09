@@ -11,7 +11,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/OzqurYalcin/google-analytics/config"
+	"github.com/PartnerFusionInc/google-analytics/config"
 )
 
 // API with mutex locking
